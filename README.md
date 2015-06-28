@@ -1,10 +1,10 @@
 ### iOS N-Body Metaball Simulation
 
-iOS n-body simulation visualized with metaballs. Physics and graphics provided by SpriteKit.
+iOS n-body simulation visualized with metaballs. Physics and graphics provided by SpriteKit using Swift.
 
 ![Gravity](https://raw.github.com/fisch0920/Gravity-cocos2d/master/Images/demo.gif)
 
-You can compare an analogous *cocos2d* version [here](https://github.com/fisch0920/Gravity-cocos2d).
+You can compare an analogous *cocos2d*, *Objective-C* version [here](https://github.com/fisch0920/Gravity-cocos2d).
 
 ## Ideas / Inspiration:
     * Rorschach Test
@@ -14,9 +14,6 @@ You can compare an analogous *cocos2d* version [here](https://github.com/fisch09
         * kill circles
         * be able to coerce nodes into a certain shape
         * probably easiest to just use polygon drawn
-
-* need to improve efficiency of multiple bodies
-    * main bottleneck is simulation
 
 ## license
 
