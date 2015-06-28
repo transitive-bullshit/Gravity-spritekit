@@ -1,6 +1,6 @@
 ### iOS N-Body Metaball Simulation
 
-iOS n-body simulation visualized with metaballs. Physics and graphics provided by SpriteKit using Swift.
+iOS n-body simulation visualized with metaballs. Physics and graphics provided by *SpriteKit* using *Swift*.
 
 ![Gravity](https://raw.github.com/fisch0920/Gravity-cocos2d/master/Images/demo.gif)
 
