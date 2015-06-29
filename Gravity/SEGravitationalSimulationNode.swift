@@ -76,12 +76,6 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         }
         
         (self._simulation.children[0] as! SKNode).hidden = true
-        /*var n = SKSpriteNode(imageNamed: "dummy")
-        n.color = UIColor(white: 1.0, alpha: 0.0)
-        n.size = CGSize(width: radius * 5, height: radius * 5)
-        self._simulation.addChild(n)*/
-        
-        println("numNodes: \(self.children.count)")
     }
     
     func update () {
@@ -101,12 +95,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
                 if (i == 0) {
                     bodyA = node.physicsBody
                     anchorA = self.scene?.convertPoint(CGPointZero, fromNode: self.children[0] as! SKNode)
-                    //anchorA = convertPoint(CGPointZero, fromNode: self.children[0] as! SKNode)
                 } else {
-    //                let joint = SKPhysicsJointSpring.jointWithBodyA(bodyA, bodyB: node.physicsBody!, anchorA: CGPointZero, anchorB: CGPointZero)
-    //                joint.damping   = 3
-    //                joint.frequency = 9
-                    
                     let anchorB = self.scene!.convertPoint(CGPointZero, fromNode: node)
                     let joint = SKPhysicsJointLimit.jointWithBodyA(bodyA, bodyB: node.physicsBody, anchorA: anchorA!, anchorB: anchorB)
                     let maxLength: CGFloat = self.radius / 10 + CGFloat.random() * (self.radius + CGFloat.random(min: -1.0, max: 1.0) * (self.radius / 10.0))
@@ -120,13 +109,13 @@ class SEGravitationalSimulationNode: SKSpriteNode {
             }
         }
         
-        // calculate n-body forces
         for var i = 0; i < self.numNodes; ++i {
             self._forces[i] = CGVector()
         }
         
         let forceMultiplier: CGFloat = 32.0;
         
+        // calculate n-body forces
         for var i = 0; i < self.numNodes; ++i {
             let node1: SEGravitationalBodyNode = self.children[i] as! SEGravitationalBodyNode
             let radius1: CGFloat = node1.radius
