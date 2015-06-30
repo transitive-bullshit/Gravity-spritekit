@@ -78,7 +78,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         (self._simulation.children[0] as! SKNode).hidden = true
     }
     
-    func update () {
+    func update (currentTime: CFTimeInterval) {
         let minForce = CGPoint(x: -kGravitationalBodyMaxForce, y: -kGravitationalBodyMaxForce)
         let maxForce = CGPoint(x: kGravitationalBodyMaxForce, y: kGravitationalBodyMaxForce)
         
@@ -113,7 +113,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
             self._forces[i] = CGVector()
         }
         
-        let forceMultiplier: CGFloat = 32.0;
+        let forceMultiplier: CGFloat = 32.0 * (1.0 - self.compression);
         
         // calculate n-body forces
         for var i = 0; i < self.numNodes; ++i {

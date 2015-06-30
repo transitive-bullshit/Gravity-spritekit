@@ -20,7 +20,7 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        self._simulation.update()
+        self._simulation.update(currentTime)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
