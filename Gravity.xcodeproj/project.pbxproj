@@ -93,10 +93,10 @@
 			children = (
 				3DAD7D9E1B3B81540058E645 /* Shaders */,
 				3D3351B91B38D78200A18503 /* AppDelegate.swift */,
+				3D3351BF1B38D78200A18503 /* GameViewController.swift */,
 				3D3351BD1B38D78200A18503 /* GameScene.swift */,
 				3D3BF8B31B3A609300F8D140 /* SEGravitationalSimulationNode.swift */,
 				3D3BF8D21B3A9C4900F8D140 /* SEGravitationalBodyNode.swift */,
-				3D3351BF1B38D78200A18503 /* GameViewController.swift */,
 				3D3351C11B38D78200A18503 /* Main.storyboard */,
 				3D3351C41B38D78200A18503 /* Images.xcassets */,
 				3D3351C61B38D78200A18503 /* LaunchScreen.xib */,

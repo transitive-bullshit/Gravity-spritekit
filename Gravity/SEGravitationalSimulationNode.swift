@@ -186,14 +186,17 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         }
 
         set {
-            for var i = 0; i < self.numNodes - 1; ++i {
-                let joint = self._joints[i]
-                let maxLength = self._jointDistances[i]
-                
-                self.scene?.physicsWorld.removeJoint(joint)
-                joint.maxLength = (self.radius / 5.0) * newValue + maxLength * (1.0 - newValue)
-                self.scene?.physicsWorld.addJoint(joint)
-            }
+           self.runAction(SKAction.customActionWithDuration(1.0, actionBlock: { (node, t) -> Void in
+                for var i = 0; i < self.numNodes - 1; ++i {
+                    let joint = self._joints[i]
+                    let maxLength = self._jointDistances[i]
+                    let newMaxLength = (self.radius / 5.0) * newValue + maxLength * (1.0 - newValue)
+                    
+                    self.scene?.physicsWorld.removeJoint(joint)
+                    joint.maxLength = t * newMaxLength + (1 - t) * maxLength
+                    self.scene?.physicsWorld.addJoint(joint)
+                }
+            }))
         }
     }
 }
