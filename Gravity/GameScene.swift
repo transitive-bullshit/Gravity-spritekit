@@ -14,7 +14,7 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         self.physicsWorld.gravity = CGVector();
         
-        self._simulation = SEGravitationalSimulationNode(numNodes: 75, radius: view.bounds.size.width / 2.0)
+        self._simulation = SEGravitationalSimulationNode(numNodes: 75, radius: 100)
         self._simulation.position = view.center
         self.addChild(self._simulation)
     }

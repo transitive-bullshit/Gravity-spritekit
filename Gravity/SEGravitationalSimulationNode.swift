@@ -34,7 +34,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         
         super.init(texture: SKTexture(imageNamed: "dummy"), color: nil, size: CGSizeMake(radius * 2, radius * 2))
         
-        self.shader = SEGravitationalSimulationNode.s_shader
+        //self.shader = SEGravitationalSimulationNode.s_shader
         
         for var i = 0; i < numNodes; ++i {
             var r = (i == 0 ? radius * 10 : radius / 8.0 + CGFloat.random() * radius / 2.0)
@@ -46,11 +46,11 @@ class SEGravitationalSimulationNode: SKSpriteNode {
                 node.hidden = true
                 
                 node.physicsBody = SKPhysicsBody(circleOfRadius: r)
-                node.physicsBody?.pinned = true
+                node.physicsBody?.dynamic = false
             } else {
                 node.position = CGPoint(x: CGFloat.random(min: -1.0, max: 1.0), y: CGFloat.random(min: -1.0, max: 1.0)) * radius
                 node.size = CGSize(width: r * 2, height: r * 2)
-                node.hidden = true
+                //node.hidden = true
                 
                 node.physicsBody = SKPhysicsBody(circleOfRadius: r)
             }
@@ -69,6 +69,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         for n in self.children {
             var node1 = n as! SEGravitationalBodyNode
             var node2 = SEGravitationalBodyNode(radius: node1.radius)
+            
             node2.position = node1.position
             node2.size = node1.size
             
@@ -175,8 +176,8 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         let yRatio: CGFloat = 1.0 * self._simulation.xScale
         let xRatio: CGFloat = 1.0 * self._simulation.yScale
         
-        self.texture = self.scene!.view!.textureFromNode(self._simulation, crop: CGRect(origin: CGPoint(x: -self.size.width * xRatio / 2.0, y: -self.size.height * yRatio / 2.0),
-            size: CGSize(width: self.size.width * xRatio, height: self.size.height * yRatio)))
+        //self.texture = self.scene!.view!.textureFromNode(self._simulation, crop: CGRect(origin: CGPoint(x: -self.size.width * xRatio / 2.0, y: -self.size.height * yRatio / 2.0),
+        //    size: CGSize(width: self.size.width * xRatio, height: self.size.height * yRatio)))
     }
     
     var compression: CGFloat {
