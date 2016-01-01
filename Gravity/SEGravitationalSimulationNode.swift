@@ -179,7 +179,6 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         self.texture = self.scene!.view!.textureFromNode(self._simulation,
             crop: CGRect(origin: CGPoint(x: -self.size.width * xRatio / 2.0, y: -self.size.height * yRatio / 2.0),
             size: CGSize(width: self.size.width * xRatio, height: self.size.height * yRatio)))
-        print("texture: \(texture)")
     }
     
     var compression: CGFloat {
