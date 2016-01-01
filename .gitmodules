@@ -1,0 +1,4 @@
+[submodule "Gravity/SKTUtils"]
+	path = Gravity/SKTUtils
+	url = https://github.com/raywenderlich/SKTUtils.git
+	branch = swift-2.0
