@@ -32,12 +32,12 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         self.numNodes = numNodes
         self.radius = radius
         
-        super.init(texture: SKTexture(imageNamed: "dummy"), color: nil, size: CGSizeMake(radius * 2, radius * 2))
+        super.init(texture: SKTexture(imageNamed: "dummy"), color: UIColor.clearColor(), size: CGSizeMake(radius * 2, radius * 2))
         self.shader = SEGravitationalSimulationNode.s_shader
         
         for var i = 0; i < numNodes; ++i {
-            var r = (i == 0 ? radius * 10 : radius / 8.0 + CGFloat.random() * radius / 2.0)
-            var node = SEGravitationalBodyNode(radius: r)
+            let r = (i == 0 ? radius * 10 : radius / 8.0 + CGFloat.random() * radius / 2.0)
+            let node = SEGravitationalBodyNode(radius: r)
             
             if (i == 0) {
                 node.position = CGPoint()
@@ -66,8 +66,8 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         //self._simulation.setScale(0.5)
         
         for n in self.children {
-            var node1 = n as! SEGravitationalBodyNode
-            var node2 = SEGravitationalBodyNode(radius: node1.radius)
+            let node1 = n as! SEGravitationalBodyNode
+            let node2 = SEGravitationalBodyNode(radius: node1.radius)
             
             node2.position = node1.position
             node2.size = node1.size
@@ -75,15 +75,15 @@ class SEGravitationalSimulationNode: SKSpriteNode {
             self._simulation.addChild(node2)
         }
         
-        (self._simulation.children[0] as! SKNode).hidden = true
+        self._simulation.children[0].hidden = true
     }
     
     func update (currentTime: CFTimeInterval) {
-        let minForce = CGPoint(x: -kGravitationalBodyMaxForce, y: -kGravitationalBodyMaxForce)
+        /*let minForce = CGPoint(x: -kGravitationalBodyMaxForce, y: -kGravitationalBodyMaxForce)
         let maxForce = CGPoint(x: kGravitationalBodyMaxForce, y: kGravitationalBodyMaxForce)
         
         let minVelocity = CGVector(dx: -kGravitationalBodyMaxVelocity, dy: -kGravitationalBodyMaxVelocity)
-        let maxVelocity = CGVector(dx: kGravitationalBodyMaxVelocity, dy: kGravitationalBodyMaxVelocity)
+        let maxVelocity = CGVector(dx: kGravitationalBodyMaxVelocity, dy: kGravitationalBodyMaxVelocity)*/
         
         if (self._joints.count == 0) {
             var bodyA: SKPhysicsBody? = nil
@@ -94,10 +94,10 @@ class SEGravitationalSimulationNode: SKSpriteNode {
                 
                 if (i == 0) {
                     bodyA = node.physicsBody
-                    anchorA = self.scene?.convertPoint(CGPointZero, fromNode: self.children[0] as! SKNode)
+                    anchorA = self.scene?.convertPoint(CGPointZero, fromNode: self.children[0])
                 } else {
                     let anchorB = self.scene!.convertPoint(CGPointZero, fromNode: node)
-                    let joint = SKPhysicsJointLimit.jointWithBodyA(bodyA, bodyB: node.physicsBody, anchorA: anchorA!, anchorB: anchorB)
+                    let joint = SKPhysicsJointLimit.jointWithBodyA(bodyA!, bodyB: node.physicsBody!, anchorA: anchorA!, anchorB: anchorB)
                     let maxLength: CGFloat = self.radius / 10 + CGFloat.random() * (self.radius + CGFloat.random(min: -1.0, max: 1.0) * (self.radius / 10.0))
                     joint.maxLength = maxLength
                     
@@ -145,7 +145,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
             let node: SEGravitationalBodyNode = self.children[i] as! SEGravitationalBodyNode
             var force = self._forces[i]
             
-            //println("force: \(NSStringFromCGVector(force)); velocity: \(NSStringFromCGVector(node.physicsBody!.velocity))")
+            //print("force: \(NSStringFromCGVector(force)); velocity: \(NSStringFromCGVector(node.physicsBody!.velocity))")
             
             force = CGVector(
                 dx: force.dx.clamped(-kGravitationalBodyMaxForce, kGravitationalBodyMaxForce),
@@ -170,7 +170,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
             node2.position = node1.position
         }
         
-//        println("frame: \(NSStringFromCGSize(self._simulation.calculateAccumulatedFrame().size)); \(NSStringFromCGSize(self.size))")
+//        print("frame: \(NSStringFromCGSize(self._simulation.calculateAccumulatedFrame().size)); \(NSStringFromCGSize(self.size))")
         
         let yRatio: CGFloat = 1.0 * self._simulation.xScale
         let xRatio: CGFloat = 1.0 * self._simulation.yScale
@@ -179,6 +179,7 @@ class SEGravitationalSimulationNode: SKSpriteNode {
         self.texture = self.scene!.view!.textureFromNode(self._simulation,
             crop: CGRect(origin: CGPoint(x: -self.size.width * xRatio / 2.0, y: -self.size.height * yRatio / 2.0),
             size: CGSize(width: self.size.width * xRatio, height: self.size.height * yRatio)))
+        print("texture: \(texture)")
     }
     
     var compression: CGFloat {

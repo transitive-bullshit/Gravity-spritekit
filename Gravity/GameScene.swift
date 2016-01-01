@@ -23,18 +23,14 @@ class GameScene: SKScene {
         self._simulation.update(currentTime)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            self._simulation.compression = 1.0
-        }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self._simulation.compression = 1.0
         
         super.touchesBegan(touches, withEvent:event)
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if let touch = touches.first as? UITouch {
-            self._simulation.compression = 0.0
-        }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self._simulation.compression = 0.0
         
         super.touchesBegan(touches, withEvent:event)
     }
