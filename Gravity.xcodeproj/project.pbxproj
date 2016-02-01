@@ -175,6 +175,7 @@
 				TargetAttributes = {
 					3D3351B31B38D78200A18503 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = ENUHJWD737;
 					};
 				};
 			};
@@ -345,6 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Gravity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sesh.$(PRODUCT_NAME:rfc1034identifier)";
@@ -356,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Gravity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sesh.$(PRODUCT_NAME:rfc1034identifier)";
