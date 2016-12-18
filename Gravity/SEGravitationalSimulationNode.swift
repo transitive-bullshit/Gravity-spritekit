@@ -36,17 +36,17 @@ class SEGravitationalSimulationNode: SKEffectNode {
         super.init()
         self.shader = SEGravitationalSimulationNode.s_shader
         
-        for var i = 0; i < numNodes; ++i {
+        for i in 0 ..< numNodes {
             let r = (i == 0 ? radius * 10 : radius / 8.0 + CGFloat.random() * radius / 2.0)
             let node = SEGravitationalBodyNode(radius: r)
             
             if (i == 0) {
                 node.position = CGPoint()
                 node.size = CGSize(width: radius * 4, height: radius * 4)
-                node.hidden = true
+                node.isHidden = true
                 
                 node.physicsBody = SKPhysicsBody(circleOfRadius: r)
-                node.physicsBody?.dynamic = false
+                node.physicsBody?.isDynamic = false
             } else {
                 node.position = CGPoint(x: CGFloat.random(min: -1.0, max: 1.0), y: CGFloat.random(min: -1.0, max: 1.0)) * radius
                 node.size = CGSize(width: r * 2, height: r * 2)
@@ -79,7 +79,7 @@ class SEGravitationalSimulationNode: SKEffectNode {
 //        self._simulation.children[0].hidden = true
     }
     
-    func update (currentTime: CFTimeInterval) {
+    func update (_ currentTime: CFTimeInterval) {
         /*let minForce = CGPoint(x: -kGravitationalBodyMaxForce, y: -kGravitationalBodyMaxForce)
         let maxForce = CGPoint(x: kGravitationalBodyMaxForce, y: kGravitationalBodyMaxForce)
         
@@ -90,39 +90,39 @@ class SEGravitationalSimulationNode: SKEffectNode {
             var bodyA: SKPhysicsBody? = nil
             var anchorA: CGPoint? = nil
             
-            for var i = 0; i < self.numNodes; ++i {
+            for i in 0 ..< self.numNodes {
                 let node: SEGravitationalBodyNode = self.children[i] as! SEGravitationalBodyNode
                 
                 if (i == 0) {
                     bodyA = node.physicsBody
-                    anchorA = self.scene?.convertPoint(CGPointZero, fromNode: self.children[0])
+                    anchorA = self.scene?.convert(CGPoint.zero, from: self.children[0])
                 } else {
-                    let anchorB = self.scene!.convertPoint(CGPointZero, fromNode: node)
-                    let joint = SKPhysicsJointLimit.jointWithBodyA(bodyA!, bodyB: node.physicsBody!, anchorA: anchorA!, anchorB: anchorB)
+                    let anchorB = self.scene!.convert(CGPoint.zero, from: node)
+                    let joint = SKPhysicsJointLimit.joint(withBodyA: bodyA!, bodyB: node.physicsBody!, anchorA: anchorA!, anchorB: anchorB)
                     let maxLength: CGFloat = self.radius / 10 + CGFloat.random() * (self.radius + CGFloat.random(min: -1.0, max: 1.0) * (self.radius / 10.0))
                     joint.maxLength = maxLength
                     
                     self._joints.append(joint)
                     self._jointDistances.append(maxLength)
                     
-                    self.scene?.physicsWorld.addJoint(joint)
+                    self.scene?.physicsWorld.add(joint)
                 }
             }
         }
         
-        for var i = 0; i < self.numNodes; ++i {
+        for i in 0 ..< self.numNodes {
             self._forces[i] = CGVector()
         }
         
         let forceMultiplier: CGFloat = 32.0 * (1.0 - self.compression);
         
         // calculate n-body forces
-        for var i = 0; i < self.numNodes; ++i {
+        for i in 0 ..< self.numNodes {
             let node1: SEGravitationalBodyNode = self.children[i] as! SEGravitationalBodyNode
             let radius1: CGFloat = node1.radius
             var force = self._forces[i]
             
-            for var j = i + 1; j < self.numNodes; ++j {
+            for j in i + 1 ..< self.numNodes {
                 let node2: SEGravitationalBodyNode = self.children[j] as! SEGravitationalBodyNode
                 
                 let delta: CGVector = CGVector(point: node1.position - node2.position)
@@ -142,7 +142,7 @@ class SEGravitationalSimulationNode: SKEffectNode {
         }
         
         // apply forces to bodies
-        for var i = 1; i < self.numNodes; ++i {
+        for i in 1 ..< self.numNodes {
             let node: SEGravitationalBodyNode = self.children[i] as! SEGravitationalBodyNode
             var force = self._forces[i]
             
@@ -189,15 +189,15 @@ class SEGravitationalSimulationNode: SKEffectNode {
 
         set {
             // change limit joint distances gradually
-            self.runAction(SKAction.customActionWithDuration(1.0, actionBlock: { (node, t) -> Void in
-                for var i = 0; i < self.numNodes - 1; ++i {
+            self.run(SKAction.customAction(withDuration: 1.0, actionBlock: { (node, t) -> Void in
+                for i in 0 ..< self.numNodes - 1 {
                     let joint = self._joints[i]
                     let maxLength = self._jointDistances[i]
                     let newMaxLength = (self.radius / 5.0) * newValue + maxLength * (1.0 - newValue)
                     
-                    self.scene?.physicsWorld.removeJoint(joint)
+                    self.scene?.physicsWorld.remove(joint)
                     joint.maxLength = t * newMaxLength + (1 - t) * maxLength
-                    self.scene?.physicsWorld.addJoint(joint)
+                    self.scene?.physicsWorld.add(joint)
                 }
             }))
         }

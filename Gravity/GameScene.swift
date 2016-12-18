@@ -11,7 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     var _simulation: SEGravitationalSimulationNode!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         self.physicsWorld.gravity = CGVector();
         
         self._simulation = SEGravitationalSimulationNode(numNodes: 75, radius: 100)
@@ -19,19 +19,19 @@ class GameScene: SKScene {
         self.addChild(self._simulation)
     }
    
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         self._simulation.update(currentTime)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self._simulation.compression = 1.0
         
-        super.touchesBegan(touches, withEvent:event)
+        super.touchesBegan(touches, with:event)
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self._simulation.compression = 0.0
         
-        super.touchesBegan(touches, withEvent:event)
+        super.touchesBegan(touches, with:event)
     }
 }

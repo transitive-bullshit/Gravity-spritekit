@@ -19,7 +19,7 @@ class SEGravitationalBodyNode: SKSpriteNode {
         
         self.radius = radius
         self.texture = SKTexture(imageNamed: "dummy")
-        self.blendMode = SKBlendMode.Add
+        self.blendMode = SKBlendMode.add
         self.shader = SEGravitationalBodyNode.s_shader
     }
 }
